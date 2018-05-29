@@ -57,7 +57,14 @@ function get_accounts(account_array, callback)
     params)
 end
 
-function comment(parent_author, parent_permlink, author, permlink, title, body, json_metadata)
+function comment(
+    parent_author, 
+    parent_permlink, 
+    author, 
+    permlink, 
+    title, 
+    body, 
+    json_metadata)
 
   native.showWebPopup(
     0,
