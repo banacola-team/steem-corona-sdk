@@ -3,7 +3,8 @@ local json = require("json")
 
 local account_array = {"steemsdk.test"}
 
---[[ test case: get_config ]]
+--[[ test case: get_config --]]
+---[[
 steem.get_config(
   function(event)
     if event.isError then
@@ -13,8 +14,10 @@ steem.get_config(
     end
   end
 )
+--]]
 
---[[ test case: get_version ]]
+--[[ test case: get_version --]]
+---[[
 steem.get_version(
   function(event)
     if event.isError then
@@ -24,8 +27,10 @@ steem.get_version(
     end
   end
 )
+--]]
 
---[[ test case: get_account_count ]]
+--[[ test case: get_account_count --]]
+---[[
 steem.get_account_count(
   function(event)
     if event.isError then
@@ -35,8 +40,10 @@ steem.get_account_count(
     end
   end
 )
+--]]
 
---[[ test case: get_accounts ]]
+--[[ test case: get_accounts --]]
+---[[
 steem.get_accounts(
   account_array,
   function(event)
@@ -46,8 +53,21 @@ steem.get_accounts(
       print("response: "..json.prettify(event.response))
       local decoded_response = json.decode(event.response)
       print("id: "..decoded_response[1]["id"].."\n"..
-            "name: "..decoded_response[1]["name"])
+        "name: "..decoded_response[1]["name"])
     end
   end
 )
+--]]
 
+--[[ test case: comment --]]
+---[[
+steem.comment(
+  "", 
+  "test", 
+  "steemsdk.test", 
+  os.time(os.date('*t')).."-post", 
+  "title-test-"..os.time(os.date('*t')), 
+  "body-test-"..os.time(os.date('*t')), 
+  ""
+)
+--]]

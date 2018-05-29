@@ -56,3 +56,51 @@ function get_accounts(account_array, callback)
     callback,
     params)
 end
+
+function comment(parent_author, parent_permlink, author, permlink, title, body, json_metadata)
+
+  native.showWebPopup(
+    0,
+    0, 
+    display.contentWidth, 
+    display.contentHeight,    
+    "https://v2.steemconnect.com/sign/comment?"..
+    "parent_author="..parent_author..
+    "&parent_permlink="..parent_permlink..
+    "&author="..author..
+    "&permlink="..permlink..
+    "&title="..title..
+    "&body="..body..
+    "&json_metadata="..json_metadata,
+    {
+      urlRequest = 
+      function(event)
+        local shouldLoad = true
+
+        local url = event.url
+
+        if url then
+          print( "You are visiting: " .. event.url )
+        end
+
+        if 1 == string.find( url, "corona:close" ) then
+          -- Close the web popup
+          shouldLoad = false
+        end
+
+        if string.find(url, "success") then
+          shouldLoad = false
+        end
+
+        if event.errorCode then
+          -- Error loading page
+          print( "Error: " .. tostring( event.errorMessage ) )
+          shouldLoad = false
+        end
+
+        return shouldLoad
+      end
+    }
+  )
+end
+
