@@ -1,5 +1,19 @@
 module(..., package.seeall)
 
+local function urlEncode( str )
+ 
+    if ( str ) then
+        str = string.gsub( str, "\n", "\r\n" )
+        str = string.gsub( str, "([^%w ])",
+            function( c )
+                return string.format( "%%%02X", string.byte(c) )
+            end
+        )
+        str = string.gsub( str, " ", "+" )
+    end
+    return str
+end
+
 function get_config(callback)
 
   local params = {}
@@ -76,8 +90,8 @@ function comment(
     "&parent_permlink="..parent_permlink..
     "&author="..author..
     "&permlink="..permlink..
-    "&title="..title..
-    "&body="..body..
+    "&title="..urlEncode(title)..
+    "&body="..urlEncode(body)..
     "&json_metadata="..json_metadata,
     {
       urlRequest = 
@@ -88,15 +102,15 @@ function comment(
 
         if url then
           print( "You are visiting: " .. event.url )
-        end
 
-        if 1 == string.find( url, "corona:close" ) then
-          -- Close the web popup
-          shouldLoad = false
-        end
+          if 1 == string.find( url, "corona:close" ) then
+            -- Close the web popup
+            shouldLoad = false
+          end
 
-        if string.find(url, "success") then
-          shouldLoad = false
+          if string.find(url, "success") then
+            shouldLoad = false
+          end
         end
 
         if event.errorCode then

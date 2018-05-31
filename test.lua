@@ -61,13 +61,16 @@ steem.get_accounts(
 
 --[[ test case: comment --]]
 ---[[
+local timestamp = os.time(os.date('*t'))
+
 steem.comment(
   "", 
   "test", 
   "steemsdk.test", 
-  os.time(os.date('*t')).."-post", 
-  "title-test-"..os.time(os.date('*t')), 
-  "body-test-"..os.time(os.date('*t')), 
+  timestamp.."-post", 
+  "test title \"helloworld\""..timestamp,
+  "test body "..timestamp, 
   ""
 )
+
 --]]
