@@ -54,9 +54,9 @@ function get_accounts(account_array, callback)
 
   for i = 1, #account_array do
     if(i < #account_array) then
-      names = names .. "%22" .. account_array[i] .. "%22" .. ","
+      names = names .. "\"" .. account_array[i] .. "\"" .. ","
     else
-      names = names .. "%22" .. account_array[i] .. "%22"
+      names = names .. "\"" .. account_array[i] .. "\""
     end
   end
 
@@ -65,7 +65,7 @@ function get_accounts(account_array, callback)
   local params = {}
 
   network.request(
-    "https://api.steemjs.com/get_accounts?names="..names,
+    "https://api.steemjs.com/get_accounts?names="..urlEncode(names),
     "GET",
     callback,
     params)
