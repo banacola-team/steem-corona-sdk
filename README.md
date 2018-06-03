@@ -1,6 +1,6 @@
 
 # steem corona sdk
-* Wrapping STEEM API into [Corona SDK](https://coronalabs.com)
+* Wrapping [STEEM API](https://v2.steemconnect.com/docs/steemjs) into [Corona SDK](https://coronalabs.com)
 
 # License
 * MIT
